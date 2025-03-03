@@ -24,8 +24,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="bg-white dark:bg-black">
+    <html className="h-full" lang="en" suppressHydrationWarning>
+      <body className="h-full flex leading-[1.2]">
         <Providers>
           {children}
         </Providers>

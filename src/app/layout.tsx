@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html className="h-full" lang="en" suppressHydrationWarning>
-      <body className="h-full">
+      <body className="h-full bg-neutral-100">
         <Providers defaultTheme="DIrk">
           {children}
         </Providers>

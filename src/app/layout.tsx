@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 // import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Providers from "./providers";
+import Providers from "../ui/providers";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -25,8 +25,8 @@ export default function RootLayout({
 }>) {
   return (
     <html className="h-full" lang="en" suppressHydrationWarning>
-      <body className="h-full flex leading-[1.2] flex-col">
-        <Providers>
+      <body className="h-full">
+        <Providers defaultTheme="DIrk">
           {children}
         </Providers>
       </body>

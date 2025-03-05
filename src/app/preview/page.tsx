@@ -11,8 +11,8 @@ export default async function Page() {
           {
             tabs.map(tab => {
               return(
-                <div key={tab.value} className="w-full text-center">
-                  <TabsTrigger value={tab.value} className={`relative w-full h-8 p-0 rounded-1 data-[state=active]:shadow-none data-[state=active]:bg-blue-50 before:cotent-[" "] before:absolute before:top-0 before:left-0 before:w-full before:h-full ${tab.class} before:bg-neutral-950 before:[mask-position:center] before:[mask-repeat:no-repeat] data-[state=active]:before:bg-blue-700`}>
+                <div key={tab.value} className="w-full h-8 text-center">
+                  <TabsTrigger value={tab.value} className={`relative w-full h-full p-0 rounded-1 data-[state=active]:shadow-none data-[state=active]:bg-blue-50 before:cotent-[" "] before:absolute before:top-0 before:left-0 before:w-full before:h-full ${tab.class} before:bg-neutral-950 before:[mask-position:center] before:[mask-repeat:no-repeat] data-[state=active]:before:bg-blue-700`}>
       
                   </TabsTrigger>
                 </div>

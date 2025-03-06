@@ -1,3 +1,4 @@
+import { addPrefix, text } from "@/lib/css-presets";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/ui/tabs";
 
 export default async function Page() {
@@ -12,8 +13,8 @@ export default async function Page() {
             tabs.map(tab => {
               return(
                 <div key={tab.value} className="w-full h-8 text-center md:h-12.25 md:border-r md:border-r-neutral-200 md:last:border-0">
-                  <TabsTrigger value={tab.value} className={`relative w-full h-full p-0 rounded-1 data-[state=active]:shadow-none data-[state=active]:bg-blue-50 before:cotent-[" "] before:absolute before:top-0 before:left-0 before:w-full before:h-full ${tab.class} before:bg-neutral-950 before:[mask-position:center] before:[mask-repeat:no-repeat] data-[state=active]:before:bg-blue-700 md:w-20`}>
-      
+                  <TabsTrigger value={tab.value} className={`relative w-full h-full p-0 rounded-1 data-[state=active]:before:bg-blue-700 ${tab.class} ${addPrefix("data-[state=active]:", "bg-blue-50 shadow-none text-blue-700")} ${addPrefix("before:", "cotent-[' '] absolute top-0 left-0 w-full h-full bg-neutral-950 [mask-position:center] [mask-repeat:no-repeat]")} ${addPrefix("md:", "w-20 before:[mask-position:center_0.25rem]")}`}>
+                    <span className={`absolute bottom-1 capitalize invisible ${addPrefix("md:", "visible")} ${text["preset-6"]}`}>{tab.value}</span>
                   </TabsTrigger>
                 </div>
               )

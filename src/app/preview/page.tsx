@@ -1,13 +1,17 @@
 import { addPrefix, text } from "@/lib/css-presets";
+import Header from "@/ui/header";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/ui/tabs";
 
 export default async function Page() {
 
   const tabs = [{ value: "home", class: `before:[mask-image:url("/icons/icon-home.svg")]` }, { value: "search", class: `before:[mask-image:url("/icons/icon-search.svg")]` }, { value: "archived", class: `before:[mask-image:url("/icons/icon-archive.svg")]` }, { value: "tags", class: `before:[mask-image:url("/icons/icon-tag.svg")]` }, { value: "settings", class: `before:[mask-image:url("/icons/icon-settings.svg")]` }];
 
+  const tabContentStyle = "";
+
   return (
     <>
-      <Tabs defaultValue="home" className="h-full gap-0">
+      <Header />
+      <Tabs defaultValue="home" className="h-fit gap-0 grow">
         <TabsList className="order-1 w-full bg-neutral-0 px-4 py-3 h-fit rounded-none border-t-neutral-200 border-t md:px-0 md:py-3">
           {
             tabs.map(tab => {
@@ -21,11 +25,11 @@ export default async function Page() {
             })
           }
         </TabsList>
-        <TabsContent value="home">Make changes to your account here.</TabsContent>
-        <TabsContent value="search">Change your password here.</TabsContent>
-        <TabsContent value="archived">Change your password here.</TabsContent>
-        <TabsContent value="tags">Change your password here.</TabsContent>
-        <TabsContent value="settings">Change your password here.</TabsContent>
+        <TabsContent value="home" className={`grow bg-neutral-0 rounded-t-[8px]`}>Make changes to your account here.</TabsContent>
+        <TabsContent value="search" className={tabContentStyle}>Change your password here.</TabsContent>
+        <TabsContent value="archived" className={tabContentStyle}>Change your password here.</TabsContent>
+        <TabsContent value="tags" className={tabContentStyle}>Change your password here.</TabsContent>
+        <TabsContent value="settings" className={tabContentStyle}>Change your password here.</TabsContent>
       </Tabs>
     </>
   );

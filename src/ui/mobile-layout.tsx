@@ -3,6 +3,7 @@ import Header from "./header";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs";
 import Notes from "./notes";
 import { INote } from "@/models/note";
+import CreateNote from "./create-note";
 
 export default function MobileLayout({notes}: {notes: INote[]}){
 
@@ -26,7 +27,10 @@ export default function MobileLayout({notes}: {notes: INote[]}){
               })
             }
           </TabsList>
-          <TabsContent value="home" className={`grow bg-neutral-0 rounded-t-[8px] dark:bg-neutral-950 py-5 px-4`}><Notes notes={notes}/></TabsContent>
+          <TabsContent value="home" className={`grow relative bg-neutral-0 rounded-t-[8px] dark:bg-neutral-950 py-5 px-4`}>
+            <Notes notes={notes}/>
+            <CreateNote />
+          </TabsContent>
           <TabsContent value="search" className={`grow bg-neutral-0 rounded-t-[8px] dark:bg-neutral-950`}>Change your password here.</TabsContent>
           <TabsContent value="archived" className={`grow bg-neutral-0 rounded-t-[8px] dark:bg-neutral-950`}>Change your password here.</TabsContent>
           <TabsContent value="tags" className={`grow bg-neutral-0 rounded-t-[8px] dark:bg-neutral-950`}>Change your password here.</TabsContent>

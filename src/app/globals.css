@@ -30,7 +30,8 @@
   --color-red-100: #FFD5D8;
   --color-red-500: #FB3748;
 
-  --shadow-sm: 0px 4px 6px 0px rgba(240, 240, 240, 0.60);
+  --shadow-d-sm: 0px -5px 6px 0px rgba(0, 0, 0, 0.50);
+  --shadow-sm: 0px -4px 6px 0px rgba(240, 240, 240, 0.60);
   --shadow-lg: 0px 8px 12px 0px rgba(240, 240, 240, 0.60);
 
   --spacing-clamp1: clamp(2rem, 0.927rem + 4.58vw, 3.125rem);

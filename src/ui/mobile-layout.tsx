@@ -1,11 +1,16 @@
+"use client";
+
 import { text } from "@/lib/css-presets";
 import Header from "./header";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs";
 import Notes from "./notes";
 import { INote } from "@/models/note";
 import CreateNote from "./create-note";
+import { useRef } from "react";
 
 export default function MobileLayout({notes}: {notes: INote[]}){
+
+  const tabRef = useRef<null | HTMLDivElement>(null);
 
   const tabs = [{ value: "home", class: `before:[mask-image:url("/icons/icon-home.svg")]` }, { value: "search", class: `before:[mask-image:url("/icons/icon-search.svg")]` }, { value: "archived", class: `before:[mask-image:url("/icons/icon-archive.svg")]` }, { value: "tags", class: `before:[mask-image:url("/icons/icon-tag.svg")]` }, { value: "settings", class: `before:[mask-image:url("/icons/icon-settings.svg")]` }];
 
@@ -14,7 +19,7 @@ export default function MobileLayout({notes}: {notes: INote[]}){
       <Header />
       <main className="h-full">
         <Tabs defaultValue="home" className="h-full gap-0">
-          <TabsList className="order-1 w-full bg-neutral-0 px-4 py-3 h-fit rounded-none shadow-sm dark:shadow-d-sm border-t-neutral-200 border-t md:px-0 md:py-3 dark:bg-neutral-950 dark:border-t-neutral-800">
+          <TabsList ref={tabRef} className="order-1 w-full bg-neutral-0 px-4 py-3 h-fit rounded-none shadow-sm dark:shadow-d-sm border-t-neutral-200 border-t md:px-0 md:py-3 dark:bg-neutral-950 dark:border-t-neutral-800">
             {
               tabs.map(tab => {
                 return(
@@ -27,8 +32,8 @@ export default function MobileLayout({notes}: {notes: INote[]}){
               })
             }
           </TabsList>
-          <TabsContent value="home" className={`grow relative bg-neutral-0 rounded-t-[8px] dark:bg-neutral-950 py-5 px-4`}>
-            <Notes notes={notes}/>
+          <TabsContent value="home" className={`grow relative bg-neutral-0 rounded-t-[8px] dark:bg-neutral-950 pt-5 px-4`}>
+            <Notes notes={notes} bottomRef={tabRef}/>
             <CreateNote />
           </TabsContent>
           <TabsContent value="search" className={`grow bg-neutral-0 rounded-t-[8px] dark:bg-neutral-950`}>Change your password here.</TabsContent>

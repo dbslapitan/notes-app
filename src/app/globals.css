@@ -32,6 +32,8 @@
 
   --shadow-sm: 0px 4px 6px 0px rgba(240, 240, 240, 0.60);
   --shadow-lg: 0px 8px 12px 0px rgba(240, 240, 240, 0.60);
+
+  --spacing-clamp1: clamp(2rem, 0.927rem + 4.58vw, 3.125rem);
 }
 
 :root {
@@ -68,8 +70,6 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-
-  --home-icon: url("../../public/icons/icon-home.svg");
 }
 
 .dark {

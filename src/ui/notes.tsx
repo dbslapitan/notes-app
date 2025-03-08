@@ -24,11 +24,15 @@ export default function Notes({notes, bottomRef}: {notes: INote[], bottomRef: Re
 
   const isSearch = currentParam === "search";
 
-  if(isSearch && searchParams.get("search")){
-    const searchValue = searchParams.get("search") as string;
-    const newNotes = notes.filter(note => note.tags.includes(searchValue) || note.content.toLowerCase().includes(searchValue.toLowerCase()) || note.title.toLowerCase().includes(searchValue.toLowerCase()));
-
-    filteredNotes.current = newNotes;
+  if(isSearch){
+    if(searchParams.get("search")){
+      const searchValue = searchParams.get("search") as string;
+      const newNotes = notes.filter(note => note.tags.includes(searchValue) || note.content.toLowerCase().includes(searchValue.toLowerCase()) || note.title.toLowerCase().includes(searchValue.toLowerCase()));
+      filteredNotes.current = newNotes;
+    }
+    else{
+      filteredNotes.current = notes;
+    }
   }
 
   useEffect(() => {

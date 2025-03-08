@@ -10,6 +10,8 @@ import Search from "./search";
 
 export default function Notes({notes, bottomRef}: {notes: INote[], bottomRef: RefObject<null | HTMLDivElement>}){
 
+  const filteredNotes = useRef(notes);
+
   const scrollRef = useRef<null | HTMLDivElement>(null);
   const initialLoadRef = useRef(false);
   const searchParams = useSearchParams();
@@ -21,6 +23,13 @@ export default function Notes({notes, bottomRef}: {notes: INote[], bottomRef: Re
   const currentParam = searchParams.has("search") && "search" || searchParams.has("tag") && "tag" || searchParams.has("archived") && "archived" || "home";
 
   const isSearch = currentParam === "search";
+
+  if(isSearch && searchParams.get("search")){
+    const searchValue = searchParams.get("search") as string;
+    const newNotes = notes.filter(note => note.tags.includes(searchValue) || note.content.toLowerCase().includes(searchValue.toLowerCase()) || note.title.toLowerCase().includes(searchValue.toLowerCase()));
+
+    filteredNotes.current = newNotes;
+  }
 
   useEffect(() => {
     const setScrollHeight = () => {
@@ -49,7 +58,7 @@ export default function Notes({notes, bottomRef}: {notes: INote[], bottomRef: Re
       <ScrollArea ref={scrollRef} className="h-0 mt-4">
         <ul>
           {
-            notes.map(note => {
+            filteredNotes.current.map(note => {
               return(
                 <li key={note._id} className="p-2 border-b border-b-neutral-200 last-of-type:border-b-0">
                   <h2 className={`${text["preset-3"]}`}>{note.title}</h2>

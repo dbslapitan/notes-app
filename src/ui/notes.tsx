@@ -34,6 +34,12 @@ export default function Notes({notes, bottomRef}: {notes: INote[], bottomRef: Re
       filteredNotes.current = notes;
     }
   }
+  else{
+    if(searchParams.has("archived")){
+      const newNotes = filteredNotes.current.filter(note => note.isArchived);
+      filteredNotes.current = newNotes;
+    }
+  }
 
   useEffect(() => {
     const setScrollHeight = () => {
@@ -54,11 +60,14 @@ export default function Notes({notes, bottomRef}: {notes: INote[], bottomRef: Re
     }
   });
 
+  console.log(filteredNotes.current)
+
   return(
     <>
       <h1 className={`${text["preset-1"]}`}>{isSearch && "Search" || "Notes"}</h1>
       <Search className={`${isSearch ? "" : "hidden"}`}/>
       <p className={`${text["preset-5"]} ${isSearch && searchParams.get("search") ? "" : "hidden"} text-neutral-700`}>All notes matching "<strong className="font-medium">{searchParams.get("search")}</strong>" are displayed below.</p>
+      <p className={`${text["preset-5"]} mt-4 p-2 bg-neutral-100 border border-neutral-200 rounded-[0.5rem] ${isSearch && searchParams.get("search") && !filteredNotes.current.length ? "" : "hidden"} text-neutral-700`}>No notes match your search. Try a different keyword or <button className="hover:cursor-pointer underline">create a new note.</button></p>
       <ScrollArea ref={scrollRef} className="h-0 mt-4">
         <ul>
           {

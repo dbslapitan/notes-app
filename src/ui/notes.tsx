@@ -5,11 +5,22 @@ import { INote } from "@/models/note";
 import { ScrollArea } from "./scroll-area";
 import { RefObject, useEffect, useRef, useState } from "react";
 import { Badge } from "./badge";
+import { useSearchParams } from "next/navigation";
+import Search from "./search";
 
 export default function Notes({notes, bottomRef}: {notes: INote[], bottomRef: RefObject<null | HTMLDivElement>}){
 
   const scrollRef = useRef<null | HTMLDivElement>(null);
   const initialLoadRef = useRef(false);
+  const searchParams = useSearchParams();
+
+  console.log("search:", searchParams.has("search"));
+  console.log("tag:", searchParams.has("tag"));
+  console.log("archived:", searchParams.has("archived"));
+
+  const currentParam = searchParams.has("search") && "search" || searchParams.has("tag") && "tag" || searchParams.has("archived") && "archived" || "home";
+
+  const isSearch = currentParam === "search";
 
   useEffect(() => {
     const setScrollHeight = () => {
@@ -32,9 +43,11 @@ export default function Notes({notes, bottomRef}: {notes: INote[], bottomRef: Re
 
   return(
     <>
-      <h1 className={`${text["preset-1"]}`}>Notes</h1>
-      <ScrollArea ref={scrollRef} className="h-0">
-        <ul className="mt-4">
+      <h1 className={`${text["preset-1"]}`}>{isSearch && "Search" || "Notes"}</h1>
+      <Search className={`${isSearch ? "" : "hidden"}`}/>
+      <p className={`${text["preset-5"]} ${isSearch && searchParams.get("search") ? "" : "hidden"} text-neutral-700`}>All notes matching "<strong className="font-medium">{searchParams.get("search")}</strong>" are displayed below.</p>
+      <ScrollArea ref={scrollRef} className="h-0 mt-4">
+        <ul>
           {
             notes.map(note => {
               return(

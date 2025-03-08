@@ -4,11 +4,11 @@ import axios from "axios";
 
 export default async function Page() {
   
-  const {data: notes} = await axios.get(`${URI}/api/v1/preview`);
+  const {data} = await axios.get(`${URI}/api/v1/preview`);
 
   return (
     <>
-      <MobileLayout notes={notes}/>
+      <MobileLayout notes={data.notes}/>
     </>
   );
 }
